@@ -1,5 +1,6 @@
 from time import sleep
-from board import SCL, SDA
+#from board import SCL, SDA
+import board
 import busio
 from adafruit_neotrellis.neotrellis import NeoTrellis
 from adafruit_neotrellis.multitrellis import MultiTrellis
@@ -7,11 +8,15 @@ import usb_midi
 import adafruit_midi
 from adafruit_midi.note_off import NoteOff
 from adafruit_midi.note_on import NoteOn
+import neopixel
 
 from buttons import *
 
+# this triggers the onboard NeoPixel on the Feather to follow the last button pressed
+led = neopixel.NeoPixel(board.NEOPIXEL, 1)
+
 # create the i2c object for the trellis
-i2c_bus = busio.I2C(SCL, SDA)
+i2c_bus = busio.I2C(board.SCL, board.SDA)
 
 """create the trellis. This is for a 2x2 array of NeoTrellis boards
 for a 2x1 array (2 boards connected left to right) you would use:
@@ -84,6 +89,7 @@ def blink(xcoord, ycoord, edge):
 
             color = keys[padNum][1]['on']
             trellis.color(xcoord, ycoord, color)
+            led[0] = color
 
         elif keys[padNum][1]['type'] is 'latching':
             #midi.send(NoteOn(keys[padNum][2], 120))
@@ -99,6 +105,7 @@ def blink(xcoord, ycoord, edge):
 
             trellis.color(xcoord, ycoord, color)
             keys[padNum][1]['state'] = not keys[padNum][1]['state']
+            led[0] = color
 
     elif edge == NeoTrellis.EDGE_FALLING:
         # print('key release! ', padNum)
@@ -107,6 +114,7 @@ def blink(xcoord, ycoord, edge):
             midi.send(NoteOff(padNum))
             color = keys[padNum][1]['off']
             trellis.color(xcoord, ycoord, color)
+            led[0] = color
 
 
 # turn off all keys now. this way you can tell if anything errored between line 32 and here

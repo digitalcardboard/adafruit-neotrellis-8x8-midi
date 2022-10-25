@@ -7,6 +7,7 @@ Required modules (copy to lib folder):
  - adafruit_neotrellis
  - adafruit_bus_device
  - adafruit_seesaw
+ - neopixel.mpy
 
 These can be downloaded [here](https://circuitpython.org/libraries) 
 
