@@ -5,31 +5,34 @@ def XY(x, y, offset=-1):
 
 color = OFF
 
+OFF_BRIGHTNESS_DIVISOR = 40     # 5, 20, 40 are reasonable options, higher is dimmer
+
 def momentary(color = OFF, off = -1, on = -1): #use to make key momentary
     if on == -1:
         on = color
     if off == -1:
-        off = (round(on[0] / 5), round(on[1] / 5), round(on[2] / 5))
+        off = (round(on[0] / OFF_BRIGHTNESS_DIVISOR), round(on[1] / OFF_BRIGHTNESS_DIVISOR), round(on[2] / OFF_BRIGHTNESS_DIVISOR))
     return {'off': off, 'on': on, 'type': 'momentary'}
 
 def latching(color = OFF, off = -1, on = -1): #use to make key latching
     if on == -1:
         on = color
     if off == -1:
-        off = (round(on[0] / 5), round(on[1] / 5), round(on[2] / 5))
+        off = (round(on[0] / OFF_BRIGHTNESS_DIVISOR), round(on[1] / OFF_BRIGHTNESS_DIVISOR), round(on[2] / OFF_BRIGHTNESS_DIVISOR))
     return {'off': off, 'on': on, 'state': False, 'type': 'latching'}
 
 # --------------------------------------------------------------------------------------
 
 # BUTTONS - top left = 1,1, bottom-right = 8,8
 # 0 = button, 1 = pad data, 2 = midi data (need to change some code around to get this to work)
+# With a standard build, orientation has USB connector on bottom edge, left side
 
 BUTTONS8x8 = [
     [XY(1, 1), momentary( RED    )],
     [XY(2, 1), momentary( ORANGE )],
     [XY(3, 1), momentary( YELLOW )],
     [XY(4, 1), momentary( GREEN  )],
-    [XY(5, 1), momentary( CYAN  )],
+    [XY(5, 1), momentary( CYAN   )],
     [XY(6, 1), momentary( BLUE   )],
     [XY(7, 1), momentary( PURPLE )],
     [XY(8, 1), momentary( PINK   )],
@@ -48,7 +51,7 @@ BUTTONS8x8 = [
     [XY(2, 3), momentary( ORANGE )],
     [XY(3, 3), momentary( YELLOW )],
     [XY(4, 3), momentary( GREEN  )],
-    [XY(5, 3), momentary( CYAN  )],
+    [XY(5, 3), momentary( CYAN   )],
     [XY(6, 3), momentary( BLUE   )],
     [XY(7, 3), momentary( PURPLE )],
     [XY(8, 3), momentary( PINK   )],
@@ -66,7 +69,7 @@ BUTTONS8x8 = [
     [XY(2, 5), momentary( ORANGE )],
     [XY(3, 5), momentary( YELLOW )],
     [XY(4, 5), momentary( GREEN  )],
-    [XY(5, 5), momentary( CYAN  )],
+    [XY(5, 5), momentary( CYAN   )],
     [XY(6, 5), momentary( BLUE   )],
     [XY(7, 5), momentary( PURPLE )],
     [XY(8, 5), momentary( PINK   )],
@@ -84,7 +87,7 @@ BUTTONS8x8 = [
     [XY(2, 7), momentary( ORANGE )],
     [XY(3, 7), momentary( YELLOW )],
     [XY(4, 7), momentary( GREEN  )],
-    [XY(5, 7), momentary( CYAN  )],
+    [XY(5, 7), momentary( CYAN   )],
     [XY(6, 7), momentary( BLUE   )],
     [XY(7, 7), momentary( PURPLE )],
     [XY(8, 7), momentary( PINK   )],

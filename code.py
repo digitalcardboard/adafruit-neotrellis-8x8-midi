@@ -19,9 +19,24 @@ trelli = [
     [NeoTrellis(i2c_bus, False, addr=0x2E), NeoTrellis(i2c_bus, False, addr=0x2F)]
     ]
 """
+
+# tiling info: https://learn.adafruit.com/adafruit-neotrellis/tiling
+# (default)             0x2E
+# A0 (+1)               0x2F
+# A1 (+2)               0x30
+# A2 (+4)               0x32
+# A3 (+8)               0x36
+# A4 (+16)              0x3E
+# A0+A1 (+3)            0x31
+
+# With a standard build, orientation has USB connector on bottom edge, left side
+# addressing as follows:
+#    Top Left, Top Right
+#    Bottom Left, Bottom Right
+
 trelli = [
     [NeoTrellis(i2c_bus, False, addr=0x2E), NeoTrellis(i2c_bus, False, addr=0x2F)],
-    [NeoTrellis(i2c_bus, False, addr=0x30), NeoTrellis(i2c_bus, False, addr=0x31)],
+    [NeoTrellis(i2c_bus, False, addr=0x31), NeoTrellis(i2c_bus, False, addr=0x30)],
 ]
 
 BUTTONS = BUTTONS8x8
